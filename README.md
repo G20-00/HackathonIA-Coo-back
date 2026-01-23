@@ -41,6 +41,35 @@ src/main/java/com/coomeva/hackathon/
 
 ### 2. Base de Datos
 
+#### Opción A: Usar Docker (Recomendado)
+
+Ejecuta MySQL en un contenedor Docker:
+
+```bash
+# Levantar MySQL
+docker compose up -d
+
+# Verificar que esté corriendo
+docker ps
+
+# Ver logs
+docker compose logs -f mysql
+
+# Detener MySQL
+docker compose down
+
+# Detener y eliminar datos
+docker compose down -v
+```
+
+El contenedor MySQL se configura automáticamente con:
+- Usuario: `hackathon`
+- Contraseña: `hackathon123`
+- Base de datos: `coomeva_hackathon`
+- Puerto: `3306`
+
+#### Opción B: Instalación Local de MySQL
+
 Crea la base de datos MySQL:
 
 ```sql
@@ -53,10 +82,18 @@ O configura la propiedad `createDatabaseIfNotExist=true` en el archivo `applicat
 
 Actualiza las credenciales de MySQL en `src/main/resources/application.properties`:
 
+**Si usas Docker (Opción A):**
+```properties
+spring.datasource.url=jdbc:mysql://localhost:3306/coomeva_hackathon?createDatabaseIfNotExist=true
+spring.datasource.username=hackathon
+spring.datasource.password=hackathon123
+```
+
+**Si usas MySQL local (Opción B):**
 ```properties
 spring.datasource.url=jdbc:mysql://localhost:3306/coomeva_hackathon?createDatabaseIfNotExist=true
 spring.datasource.username=root
-spring.datasource.password=root
+spring.datasource.password=tu_contraseña
 ```
 
 ### 4. Instalación
