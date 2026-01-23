@@ -1,0 +1,186 @@
+# Coomeva Hackathon API - Script de Pruebas
+
+## Variables
+@baseUrl = http://localhost:8080/api
+@token = 
+
+### 1. Registro de Usuario
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@ejemplo.com",
+  "password": "test123",
+  "firstName": "Test",
+  "lastName": "Usuario",
+  "documentNumber": "9999999999",
+  "phone": "3009999999",
+  "address": "Calle 123 #45-67, Cali"
+}
+
+###
+
+### 2. Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@coomeva.com",
+  "password": "usuario123"
+}
+
+###
+
+### 3. Login como Admin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@coomeva.com",
+  "password": "admin123"
+}
+
+###
+
+### 4. Obtener todos los servicios
+GET {{baseUrl}}/services
+
+###
+
+### 5. Obtener servicios disponibles
+GET {{baseUrl}}/services/available
+
+###
+
+### 6. Obtener servicios por tipo
+GET {{baseUrl}}/services/type/SALUD
+
+###
+
+### 7. Buscar servicios
+GET {{baseUrl}}/services/search?keyword=médico
+
+###
+
+### 8. Obtener todas las categorías
+GET {{baseUrl}}/categories
+
+###
+
+### 9. Obtener todas las alianzas
+GET {{baseUrl}}/alliances
+
+###
+
+### 10. Obtener alianzas activas
+GET {{baseUrl}}/alliances/active
+
+###
+
+### 11. Crear una orden (requiere auth)
+POST {{baseUrl}}/orders
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "items": [
+    {
+      "serviceId": 1,
+      "quantity": 1
+    },
+    {
+      "serviceId": 2,
+      "quantity": 2
+    }
+  ],
+  "notes": "Orden de prueba para servicios de salud"
+}
+
+###
+
+### 12. Obtener mis órdenes (requiere auth)
+GET {{baseUrl}}/orders/my-orders
+Authorization: Bearer {{token}}
+
+###
+
+### 13. Procesar pago (requiere auth)
+POST {{baseUrl}}/payments/process
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "orderId": 1,
+  "paymentMethod": "CREDIT_CARD",
+  "cardNumber": "4111111111111111",
+  "cardHolderName": "Test Usuario",
+  "expiryDate": "12/26",
+  "cvv": "123"
+}
+
+###
+
+### 14. Obtener pago por orden (requiere auth)
+GET {{baseUrl}}/payments/order/1
+Authorization: Bearer {{token}}
+
+###
+
+### 15. Crear servicio (requiere admin)
+POST {{baseUrl}}/services
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Nuevo Servicio de Salud",
+  "description": "Descripción del servicio",
+  "price": 150000,
+  "type": "SALUD",
+  "available": true,
+  "imageUrl": "https://via.placeholder.com/300",
+  "category": {
+    "id": 1
+  }
+}
+
+###
+
+### 16. Crear categoría (requiere admin)
+POST {{baseUrl}}/categories
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Nueva Categoría",
+  "description": "Descripción de la categoría",
+  "icon": "🎯"
+}
+
+###
+
+### 17. Crear alianza (requiere admin)
+POST {{baseUrl}}/alliances
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Nueva Alianza Empresarial",
+  "description": "Descripción de la alianza",
+  "website": "https://ejemplo.com",
+  "contactEmail": "contacto@ejemplo.com",
+  "contactPhone": "602-1234567",
+  "active": true,
+  "logoUrl": "https://via.placeholder.com/150"
+}
+
+###
+
+### 18. Health Check
+GET http://localhost:8080/actuator/health
+
+###
+
+### 19. Swagger UI
+GET http://localhost:8080/swagger-ui.html
+
+###
