@@ -1,6 +1,7 @@
 package com.coomeva.hackathon.controller;
 
 import com.coomeva.hackathon.dto.PaymentRequest;
+import com.coomeva.hackathon.dto.PaymentResponse;
 import com.coomeva.hackathon.entity.Payment;
 import com.coomeva.hackathon.service.PaymentService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,21 +23,24 @@ public class PaymentController {
     @PostMapping("/process")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Process payment (Sandbox mode)")
-    public ResponseEntity<Payment> processPayment(@RequestBody PaymentRequest request) {
-        return ResponseEntity.ok(paymentService.processPayment(request));
+    public ResponseEntity<PaymentResponse> processPayment(@RequestBody PaymentRequest request) {
+        Payment payment = paymentService.processPayment(request);
+        return ResponseEntity.ok(PaymentResponse.fromEntity(payment));
     }
 
     @GetMapping("/order/{orderId}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Get payment by order ID")
-    public ResponseEntity<Payment> getPaymentByOrderId(@PathVariable Long orderId) {
-        return ResponseEntity.ok(paymentService.getPaymentByOrderId(orderId));
+    public ResponseEntity<PaymentResponse> getPaymentByOrderId(@PathVariable Long orderId) {
+        Payment payment = paymentService.getPaymentByOrderId(orderId);
+        return ResponseEntity.ok(PaymentResponse.fromEntity(payment));
     }
 
     @GetMapping("/{id}")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @Operation(summary = "Get payment by ID")
-    public ResponseEntity<Payment> getPaymentById(@PathVariable Long id) {
-        return ResponseEntity.ok(paymentService.getPaymentById(id));
+    public ResponseEntity<PaymentResponse> getPaymentById(@PathVariable Long id) {
+        Payment payment = paymentService.getPaymentById(id);
+        return ResponseEntity.ok(PaymentResponse.fromEntity(payment));
     }
 }

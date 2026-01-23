@@ -1,5 +1,6 @@
 package com.coomeva.hackathon.controller;
 
+import com.coomeva.hackathon.dto.CreateServiceRequest;
 import com.coomeva.hackathon.entity.Service;
 import com.coomeva.hackathon.service.ServiceService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -59,15 +60,15 @@ public class ServiceController {
     @PostMapping
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new service (Admin only)")
-    public ResponseEntity<Service> createService(@RequestBody Service service) {
-        return ResponseEntity.ok(serviceService.createService(service));
+    public ResponseEntity<Service> createService(@RequestBody CreateServiceRequest request) {
+        return ResponseEntity.ok(serviceService.createService(request));
     }
 
     @PutMapping("/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update service (Admin only)")
-    public ResponseEntity<Service> updateService(@PathVariable Long id, @RequestBody Service service) {
-        return ResponseEntity.ok(serviceService.updateService(id, service));
+    public ResponseEntity<Service> updateService(@PathVariable Long id, @RequestBody CreateServiceRequest request) {
+        return ResponseEntity.ok(serviceService.updateService(id, request));
     }
 
     @DeleteMapping("/{id}")
