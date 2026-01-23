@@ -1,5 +1,6 @@
 package com.coomeva.hackathon.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,11 +42,12 @@ public class Service {
     @Column(nullable = false)
     private ServiceType type;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @ManyToMany(mappedBy = "services")
+    @JsonIgnore
     private Set<Alliance> alliances = new HashSet<>();
 
     @CreationTimestamp

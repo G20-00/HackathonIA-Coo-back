@@ -1,5 +1,6 @@
 package com.coomeva.hackathon.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,5 +43,6 @@ public class Alliance {
         joinColumns = @JoinColumn(name = "alliance_id"),
         inverseJoinColumns = @JoinColumn(name = "service_id")
     )
+    @JsonIgnore
     private Set<Service> services = new HashSet<>();
 }
