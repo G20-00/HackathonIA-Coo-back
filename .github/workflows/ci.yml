@@ -16,10 +16,12 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: daniel
           MYSQL_DATABASE: coomeva_hackathon
+          MYSQL_USER: hackathon
+          MYSQL_PASSWORD: hackathon123
         ports:
           - 3306:3306
         options: >-
-          --health-cmd="mysqladmin ping -h localhost -uroot -pdaniel"
+          --health-cmd="mysqladmin ping -h localhost -uhackathon -phackathon123"
           --health-interval=10s
           --health-timeout=5s
           --health-retries=5
@@ -34,6 +36,9 @@ jobs:
         java-version: '21'
         distribution: 'temurin'
         cache: maven
+    
+    - name: Make mvnw executable
+      run: chmod +x ./mvnw
         
     - name: Build with Maven
       run: ./mvnw clean compile
