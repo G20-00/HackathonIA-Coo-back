@@ -118,7 +118,7 @@ mvnw.cmd clean install
 mvnw.cmd spring-boot:run
 ```
 
-La aplicación estará disponible en: `http://localhost:8080`
+La aplicación estará disponible en: `http://localhost:8081`
 
 ## 📚 Documentación API
 
@@ -126,8 +126,8 @@ La aplicación estará disponible en: `http://localhost:8080`
 
 Accede a la documentación interactiva de la API:
 
-- **Swagger UI**: http://localhost:8080/swagger-ui.html
-- **OpenAPI Docs**: http://localhost:8080/api-docs
+- **Swagger UI**: http://localhost:8081/swagger-ui.html
+- **OpenAPI Docs**: http://localhost:8081/api-docs
 
 ## 🔐 Autenticación
 
@@ -278,7 +278,7 @@ Al iniciar la aplicación por primera vez, se cargan automáticamente:
 
 ### 1. Registrar un nuevo usuario
 ```http
-POST http://localhost:8080/api/auth/register
+POST http://localhost:8081/api/auth/register
 Content-Type: application/json
 
 {
@@ -293,7 +293,7 @@ Content-Type: application/json
 
 ### 2. Login
 ```http
-POST http://localhost:8080/api/auth/login
+POST http://localhost:8081/api/auth/login
 Content-Type: application/json
 
 {
@@ -304,12 +304,12 @@ Content-Type: application/json
 
 ### 3. Obtener servicios (no requiere auth)
 ```http
-GET http://localhost:8080/api/services/available
+GET http://localhost:8081/api/services/available
 ```
 
 ### 4. Crear una orden (requiere auth)
 ```http
-POST http://localhost:8080/api/orders
+POST http://localhost:8081/api/orders
 Authorization: Bearer {tu_token_aqui}
 Content-Type: application/json
 
@@ -326,7 +326,7 @@ Content-Type: application/json
 
 ### 5. Procesar pago
 ```http
-POST http://localhost:8080/api/payments/process
+POST http://localhost:8081/api/payments/process
 Authorization: Bearer {tu_token_aqui}
 Content-Type: application/json
 
@@ -389,8 +389,8 @@ configuration.setAllowedOrigins(List.of(
 
 Spring Boot Actuator está habilitado:
 
-- Health Check: http://localhost:8080/actuator/health
-- Info: http://localhost:8080/actuator/info
+- Health Check: http://localhost:8081/actuator/health
+- Info: http://localhost:8081/actuator/info
 
 ## 🚨 Manejo de Errores
 
@@ -439,7 +439,7 @@ Códigos de estado comunes:
 // services/api.ts
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080/api';
+const API_URL = 'http://localhost:8081/api';
 
 export const api = axios.create({
   baseURL: API_URL,
